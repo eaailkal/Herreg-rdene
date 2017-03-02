@@ -1,0 +1,44 @@
+<html class="no-js">
+<head>
+	<title>Brors demo Modernizr</title>	
+	<meta charset="utf-8">	
+	<style>
+		li{color:green}
+		.no-canvas li.canvas{ color: red; }
+		.no-geolocation li.geolocation{ color: red; }
+		.no-sessionstorage li.sessionstorage{ color: red; }
+		.no-setclasses li.setclasses{ color: red; }
+		
+		.no-js ul {display:none;} /*Modernizr couldnt run - dont show list*/
+		.js p {display:none;} /*Javascript OK - dont show error message*/
+		.geolocation h2 {color:green;}  
+	</style>
+	<script src="modernizr-custom.js"></script>
+</head>
+<body>
+	<nav><ul>
+		<li class="canvas">canvas</li>
+		<li class="geolocation">geolocation</li>
+		<li class="sessionstorage">sessionstorage</li>
+		<li class="setclasses">setclasses</li>
+	</ul></nav>
+	<h2 id="demo">Where am I</h1>
+	<p>Javascript is required for this app to work. Please turn it on in your browser.</p>
+ 	<script>
+		var x = document.getElementById("demo");
+		alert(x);  // purely for delaying action in demo, show document IS rendered
+		function getMyLocation() {
+		    if (Modernizr.geolocation) {
+		        navigator.geolocation.getCurrentPosition(displayValues);
+		    } else {
+		        x.innerHTML = "Geolocation is not supported by this browser.";
+		    }
+		}
+		function displayValues(position) {
+		    x.innerHTML = "My latitude: " + position.coords.latitude +
+		    "<br>My longitude: " + position.coords.longitude;
+		}
+		getMyLocation();
+	</script>
+</body>
+</html>
